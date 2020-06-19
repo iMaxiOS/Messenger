@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC4DB059249CCA2D0061ED81 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4DB058249CCA2D0061ED81 /* Extensions.swift */; };
 		ACA03D3A249CBDD40019DA64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA03D39249CBDD40019DA64 /* AppDelegate.swift */; };
 		ACA03D3C249CBDD40019DA64 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA03D3B249CBDD40019DA64 /* SceneDelegate.swift */; };
 		ACA03D3E249CBDD40019DA64 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA03D3D249CBDD40019DA64 /* ConversationsViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC4DB058249CCA2D0061ED81 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		ACA03D36249CBDD40019DA64 /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA03D39249CBDD40019DA64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACA03D3B249CBDD40019DA64 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			children = (
 				ACA03D39249CBDD40019DA64 /* AppDelegate.swift */,
 				ACA03D3B249CBDD40019DA64 /* SceneDelegate.swift */,
+				AC4DB058249CCA2D0061ED81 /* Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				ACA03D5C249CC14A0019DA64 /* NewConversationViewController.swift in Sources */,
 				ACA03D3E249CBDD40019DA64 /* ConversationsViewController.swift in Sources */,
 				ACA03D5A249CC1260019DA64 /* VideoPlayerViewController.swift in Sources */,
+				AC4DB059249CCA2D0061ED81 /* Extensions.swift in Sources */,
 				ACA03D3A249CBDD40019DA64 /* AppDelegate.swift in Sources */,
 				ACA03D5E249CC15D0019DA64 /* ProfileViewController.swift in Sources */,
 				ACA03D3C249CBDD40019DA64 /* SceneDelegate.swift in Sources */,
