@@ -21,8 +21,11 @@ class RegisterViewController: UIViewController {
         let iv = UIImageView()
         iv.image = UIImage(systemName: "person")
         iv.isUserInteractionEnabled = true
-        iv.tintColor = .systemGray
+        iv.tintColor = .systemGray4
         iv.contentMode = .scaleAspectFit
+        iv.layer.masksToBounds = true
+        iv.layer.borderColor = UIColor.systemGray4.cgColor
+        iv.layer.borderWidth = 6
         return iv
     }()
     
@@ -33,7 +36,7 @@ class RegisterViewController: UIViewController {
         tf.autocorrectionType = .no
         tf.layer.cornerRadius = 12
         tf.layer.borderColor = UIColor.systemGray4.cgColor
-        tf.layer.borderWidth = 0.6
+        tf.layer.borderWidth = 1
         tf.placeholder = "Enter First Name..."
         tf.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: 0))
         tf.leftViewMode = .always
@@ -47,7 +50,7 @@ class RegisterViewController: UIViewController {
         tf.autocorrectionType = .no
         tf.layer.cornerRadius = 12
         tf.layer.borderColor = UIColor.systemGray4.cgColor
-        tf.layer.borderWidth = 0.6
+        tf.layer.borderWidth = 1
         tf.placeholder = "Enter Last Name..."
         tf.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: 0))
         tf.leftViewMode = .always
@@ -62,7 +65,7 @@ class RegisterViewController: UIViewController {
         tf.autocorrectionType = .no
         tf.layer.cornerRadius = 12
         tf.layer.borderColor = UIColor.systemGray4.cgColor
-        tf.layer.borderWidth = 0.6
+        tf.layer.borderWidth = 1
         tf.placeholder = "Enter Email Address..."
         tf.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: 0))
         tf.leftViewMode = .always
@@ -76,7 +79,7 @@ class RegisterViewController: UIViewController {
         tf.autocorrectionType = .no
         tf.layer.cornerRadius = 12
         tf.layer.borderColor = UIColor.systemGray4.cgColor
-        tf.layer.borderWidth = 0.6
+        tf.layer.borderWidth = 1
         tf.placeholder = "Enter Password..."
         tf.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: 0))
         tf.leftViewMode = .always
@@ -127,6 +130,7 @@ class RegisterViewController: UIViewController {
         scrollView.frame = view.bounds
         let size = scrollView.width / 3
         logoImageView.frame = CGRect(x: (scrollView.width - size) / 2, y: 20, width: size, height: size)
+        logoImageView.layer.cornerRadius = logoImageView.width / 2
         firstNameTextField.frame = CGRect(x: 30, y: logoImageView.bottom + 30, width: scrollView.width - 60, height: 50)
         lastNameTextField.frame = CGRect(x: 30, y: firstNameTextField.bottom + 10, width: scrollView.width - 60, height: 50)
         emailTextField.frame = CGRect(x: 30, y: lastNameTextField.bottom + 10, width: scrollView.width - 60, height: 50)
@@ -134,8 +138,37 @@ class RegisterViewController: UIViewController {
         registerButton.frame = CGRect(x: 30, y: passwordTextField.bottom + 30, width: scrollView.width - 60, height: 50)
     }
     
+    fileprivate func presentPhotoActionSheet() {
+        let alert = UIAlertController(title: "Profile Picture", message: "How would you like to select a picture?", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { [weak self] _ in
+            self?.presentCamera()
+        }))
+        alert.addAction(UIAlertAction(title: "Chose Photo", style: .default, handler: { [weak self] _ in
+            self?.presentPhotoPicker()
+        }))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func presentCamera() {
+        let vc = UIImagePickerController()
+        vc.allowsEditing = true
+        vc.delegate = self
+        vc.sourceType = .camera
+        present(vc, animated: true, completion: nil)
+    }
+    
+    private func presentPhotoPicker() {
+        let vc = UIImagePickerController()
+        vc.allowsEditing = true
+        vc.delegate = self
+        vc.sourceType = .photoLibrary
+        present(vc, animated: true, completion: nil)
+    }
+    
     @objc private func didTapChangePic() {
-        print("tap")
+        presentPhotoActionSheet()
     }
     
     @objc private func registerButtonTapped() {
@@ -176,5 +209,19 @@ extension RegisterViewController: UITextFieldDelegate {
             registerButtonTapped()
         }
         return true
+    }
+}
+
+//MARK: Image Picker Delegete
+extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
+        self.logoImageView.image = selectedImage
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }
