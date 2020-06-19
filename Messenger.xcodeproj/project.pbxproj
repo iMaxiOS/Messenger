@@ -49,6 +49,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC4DB057249CC2A90061ED81 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				ACA03D53249CC0CB0019DA64 /* LoginViewController.swift */,
+				ACA03D55249CC0D90019DA64 /* RegisterViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		ACA03D2D249CBDD30019DA64 = {
 			isa = PBXGroup;
 			children = (
@@ -81,9 +90,8 @@
 		ACA03D4D249CBF4C0019DA64 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				AC4DB057249CC2A90061ED81 /* Login */,
 				ACA03D3D249CBDD40019DA64 /* ConversationsViewController.swift */,
-				ACA03D53249CC0CB0019DA64 /* LoginViewController.swift */,
-				ACA03D55249CC0D90019DA64 /* RegisterViewController.swift */,
 				ACA03D57249CC1190019DA64 /* PhotoViewerViewController.swift */,
 				ACA03D59249CC1260019DA64 /* VideoPlayerViewController.swift */,
 				ACA03D5B249CC14A0019DA64 /* NewConversationViewController.swift */,
