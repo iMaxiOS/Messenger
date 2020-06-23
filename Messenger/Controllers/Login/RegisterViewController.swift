@@ -20,13 +20,13 @@ class RegisterViewController: UIViewController {
     
     private let logoImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(systemName: "person")
+        iv.image = UIImage(systemName: "person.circle")
         iv.isUserInteractionEnabled = true
         iv.tintColor = .systemGray4
         iv.contentMode = .scaleAspectFit
         iv.layer.masksToBounds = true
         iv.layer.borderColor = UIColor.systemGray4.cgColor
-        iv.layer.borderWidth = 6
+        iv.layer.borderWidth = 3
         return iv
     }()
     
@@ -183,14 +183,16 @@ class RegisterViewController: UIViewController {
             return
         }
         
-        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { result, error in
+        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
+            guard let self = self else { return }
             guard let result = result, error == nil else {
                 print("Error creating user")
                 return
             }
             
             let user = result.user
-            print("Create user \(user)")
+            
+            self.navigationController?.dismiss(animated: true, completion: nil)
         }
     }
     
