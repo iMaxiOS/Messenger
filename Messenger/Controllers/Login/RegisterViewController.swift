@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegisterViewController: UIViewController {
     
@@ -180,6 +181,16 @@ class RegisterViewController: UIViewController {
         guard let firstName = firstNameTextField.text, let lastName = lastNameTextField.text, let email = emailTextField.text, let password = passwordTextField.text, !firstName.isEmpty, !lastName.isEmpty, !email.isEmpty, !password.isEmpty, password.count >= 6 else {
             alertUserLoginError()
             return
+        }
+        
+        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { result, error in
+            guard let result = result, error == nil else {
+                print("Error creating user")
+                return
+            }
+            
+            let user = result.user
+            print("Create user \(user)")
         }
     }
     
