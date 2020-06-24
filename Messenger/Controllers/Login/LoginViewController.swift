@@ -9,8 +9,11 @@
 import UIKit
 import FirebaseAuth
 import FBSDKLoginKit
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
+    
+    private var loginObserver: NSObjectProtocol?
         
     private let scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -74,9 +77,27 @@ class LoginViewController: UIViewController {
         button.clipsToBounds = true
         return button
     }()
+    
+    private let googleSignInButton: GIDSignInButton = {
+        let button = GIDSignInButton()
+        button.layer.cornerRadius = 12
+        button.clipsToBounds = true
+        button.backgroundColor = .systemBlue
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //dismiss vc when sign in with google
+        loginObserver = NotificationCenter.default.addObserver(forName: .didNotification, object: nil, queue: .main, using: { [weak self] _ in
+            guard let self = self else { return }
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        })
+        
+        //instance presenting
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        
         title = "Log In"
         view.backgroundColor = .systemBackground
         
@@ -93,6 +114,7 @@ class LoginViewController: UIViewController {
         scrollView.addSubview(passwordTextField)
         scrollView.addSubview(logInButton)
         scrollView.addSubview(fbSignInButton)
+        scrollView.addSubview(googleSignInButton)
     }
     
     override func viewDidLayoutSubviews() {
@@ -104,6 +126,7 @@ class LoginViewController: UIViewController {
         passwordTextField.frame = CGRect(x: 30, y: emailTextField.bottom + 10, width: scrollView.width - 60, height: 50)
         logInButton.frame = CGRect(x: 30, y: passwordTextField.bottom + 30, width: scrollView.width - 60, height: 50)
         fbSignInButton.frame = CGRect(x: 30, y: logInButton.bottom + 30, width: scrollView.width - 60, height: 50)
+        googleSignInButton.frame = CGRect(x: 30, y: fbSignInButton.bottom + 30, width: scrollView.width - 60, height: 50)
     }
     
     @objc private func loginButtonTapped() {
@@ -136,6 +159,12 @@ class LoginViewController: UIViewController {
         let registerVC = RegisterViewController()
         registerVC.title = "Create Account"
         navigationController?.pushViewController(registerVC, animated: true)
+    }
+    
+    deinit {
+        if let notification = loginObserver {
+            NotificationCenter.default.removeObserver(notification)
+        }
     }
 }
 
