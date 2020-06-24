@@ -17,6 +17,7 @@ import GoogleSignIn
         FirebaseApp.configure()
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
+        
         return true
     }
     
@@ -31,6 +32,7 @@ import GoogleSignIn
             if let error = error {
                 print("Failed to sign in with Google, \(error)")
             }
+            
             return
         }
         
