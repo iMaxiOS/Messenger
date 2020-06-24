@@ -16,7 +16,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     
     private var data = ["Sign Out"]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
