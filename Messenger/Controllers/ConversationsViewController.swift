@@ -10,6 +10,12 @@ import UIKit
 import FirebaseAuth
 
 class ConversationsViewController: UIViewController {
+    
+//    private let tableView: UITableView = {
+//        let tableView = UITableView()
+//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
+//        return tableView
+//    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,3 +38,14 @@ class ConversationsViewController: UIViewController {
         }
     }
 }
+
+//extension ConversationsViewController: UITableViewDelegate, UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 10
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
+//        return cell
+//    }
+//}
