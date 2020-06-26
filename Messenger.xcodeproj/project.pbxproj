@@ -25,6 +25,7 @@
 		ACA03D5E249CC15D0019DA64 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA03D5D249CC15D0019DA64 /* ProfileViewController.swift */; };
 		ACC7ADC124A6132400B993B5 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC7ADC024A6132400B993B5 /* StorageManager.swift */; };
 		ACC7ADC324A6196400B993B5 /* StorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC7ADC224A6196400B993B5 /* StorageError.swift */; };
+		ACC7ADC524A6233300B993B5 /* ChatAppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC7ADC424A6233300B993B5 /* ChatAppUser.swift */; };
 		ACD4D36924A382FC00785D03 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD4D36824A382FC00785D03 /* ChatViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		ACA03D5D249CC15D0019DA64 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		ACC7ADC024A6132400B993B5 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		ACC7ADC224A6196400B993B5 /* StorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageError.swift; sourceTree = "<group>"; };
+		ACC7ADC424A6233300B993B5 /* ChatAppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAppUser.swift; sourceTree = "<group>"; };
 		ACD4D36824A382FC00785D03 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		F4B40C0DEBF3048A22748E92 /* Pods-Messenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.debug.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,6 +144,7 @@
 		ACA03D4F249CBF5B0019DA64 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				ACC7ADC424A6233300B993B5 /* ChatAppUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				ACA03D3A249CBDD40019DA64 /* AppDelegate.swift in Sources */,
 				ACA03D5E249CC15D0019DA64 /* ProfileViewController.swift in Sources */,
 				ACA03D3C249CBDD40019DA64 /* SceneDelegate.swift in Sources */,
+				ACC7ADC524A6233300B993B5 /* ChatAppUser.swift in Sources */,
 				ACC7ADC324A6196400B993B5 /* StorageError.swift in Sources */,
 				ACD4D36924A382FC00785D03 /* ChatViewController.swift in Sources */,
 				ACA03D58249CC1190019DA64 /* PhotoViewerViewController.swift in Sources */,

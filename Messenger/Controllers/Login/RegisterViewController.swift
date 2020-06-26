@@ -180,12 +180,12 @@ class RegisterViewController: UIViewController {
         passwordTextField.resignFirstResponder()
         firstNameTextField.resignFirstResponder()
         lastNameTextField.resignFirstResponder()
-
+        
         guard let firstName = firstNameTextField.text, let lastName = lastNameTextField.text, let email = emailTextField.text, let password = passwordTextField.text, !firstName.isEmpty, !lastName.isEmpty, !email.isEmpty, !password.isEmpty, password.count >= 6 else {
             alertUserLoginError()
             return
         }
-
+        
         self.spinnerView.show(in: view)
         
         DatabaseManager.shared.emailExists(with: email) { [weak self] exists in
@@ -205,8 +205,22 @@ class RegisterViewController: UIViewController {
                     print("Error creating user")
                     return
                 }
-                
-                DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName, lastName: lastName, emailAddress: email))
+                let userChat = ChatAppUser(firstName: firstName, lastName: lastName, emailAddress: email)
+                DatabaseManager.shared.insertUser(with: userChat, complition: { success in
+                    if success {
+                        guard let image = self.logoImageView.image, let data = image.pngData() else { return }
+                        let fileName = userChat.profilePictureFileName
+                        StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName) { result in
+                            switch result {
+                            case .success(let downloadUrl):
+                                UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
+                                print(downloadUrl)
+                            case .failure(let error):
+                                print("Storege manager error", error)
+                            }
+                        }
+                    }
+                })
                 
                 self.navigationController?.dismiss(animated: true, completion: nil)
             }
