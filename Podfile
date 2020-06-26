@@ -10,7 +10,7 @@ pod 'Firebase/Database'
 pod 'FBSDKLoginKit'
 pod 'GoogleSignIn'
 pod 'MessageKit'
-pod 'MBProgressHUD'
+pod 'JGProgressHUD'
 pod 'RealmSwift'
 pod 'SDWebImage'
 
