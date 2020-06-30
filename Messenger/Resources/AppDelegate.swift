@@ -42,6 +42,9 @@ import GoogleSignIn
         let email = user.profile.email ?? "default"
         let firstName = user.profile.givenName ?? "default"
         let lastName = user.profile.familyName ?? "dafault"
+        
+        UserDefaults.standard.set(email, forKey: "email")
+        
         DatabaseManager.shared.emailExists(with: email) { exists in
             if !exists {
                 let userChat = ChatAppUser(firstName: firstName, lastName: lastName, emailAddress: email)

@@ -54,8 +54,6 @@ class ConversationsViewController: UIViewController {
     @objc private func hanleComposeButton() {
         let newConversationVC = NewConversationViewController()
         let navController = UINavigationController(rootViewController: newConversationVC)
-//        navController.isNavigationBarHidden = true
-//        navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true, completion: nil)
     }
     
@@ -65,8 +63,6 @@ class ConversationsViewController: UIViewController {
             let navController = UINavigationController(rootViewController: loginVC)
             navController.modalPresentationStyle = .fullScreen
             present(navController, animated: false)
-        } else {
-            print("Ok user signIn in application")
         }
     }
     

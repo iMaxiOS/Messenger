@@ -10,5 +10,5 @@ import Foundation
 
 enum StorageError: Error {
     case failedToUpload
-    case fiiledToDownloadUrl
+    case failedToDownloadUrl
 }

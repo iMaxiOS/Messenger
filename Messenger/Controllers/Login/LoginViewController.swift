@@ -150,6 +150,8 @@ class LoginViewController: UIViewController {
                 self.spinnerView.dismiss()
             }
             
+            UserDefaults.standard.set(email, forKey: "email")
+            
             guard authResult != nil, error == nil else {
                 print("Error sign in user")
                 return
