@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageKit
+import InputBarAccessoryView
 
 struct Message: MessageType {
     var sender: SenderType
@@ -24,6 +25,9 @@ struct Sender: SenderType {
 
 class ChatViewController: MessagesViewController {
     
+    public var isNewConversation = false
+    public let otherUserEmail: String
+    
     private var message = [Message]()
     private let sender = Sender(photoURL: "", senderId: "1", displayName: "Joe Smith")
 
@@ -37,9 +41,17 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
+        messageInputBar.delegate = self
     }
     
+    init(with email: String) {
+        self.otherUserEmail = email
+        super.init(nibName: nil, bundle: nil)
+    }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 extension ChatViewController: MessageCellDelegate, MessagesDataSource, MessagesDisplayDelegate, MessagesLayoutDelegate {
@@ -53,5 +65,12 @@ extension ChatViewController: MessageCellDelegate, MessagesDataSource, MessagesD
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return message.count
+    }
+}
+
+extension ChatViewController: InputBarAccessoryViewDelegate {
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+        guard !text.replacingOccurrences(of: " ", with: "").isEmpty else { return }
+        
     }
 }

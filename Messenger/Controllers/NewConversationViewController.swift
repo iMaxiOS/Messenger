@@ -13,6 +13,7 @@ class NewConversationViewController: UIViewController {
     
     private var users = [[String: String]]()
     private var results = [[String: String]]()
+    public var complition: (([String: String]) -> (Void))?
     private var hasFetched = false
     
     private let spinnerView = JGProgressHUD(style: .dark)
@@ -135,5 +136,12 @@ extension NewConversationViewController: UITableViewDelegate, UITableViewDataSou
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let targetUserData = results[indexPath.row]
+        dismiss(animated: true) { [weak self] in
+            self?.complition?(targetUserData)
+        }
+    }
 }

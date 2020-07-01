@@ -53,8 +53,24 @@ class ConversationsViewController: UIViewController {
     
     @objc private func hanleComposeButton() {
         let newConversationVC = NewConversationViewController()
+        newConversationVC.complition = { [weak self] result in
+            self?.createNewConversation(result: result)
+        }
         let navController = UINavigationController(rootViewController: newConversationVC)
         present(navController, animated: true, completion: nil)
+    }
+    
+    private func createNewConversation(result: [String: String]) {
+        guard let name = result["name"],
+            let email = result["email"] else {
+                return
+        }
+        
+        let vc = ChatViewController(with: email)
+        vc.isNewConversation = true
+        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.title = name
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func validationUser() {
@@ -90,7 +106,7 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let vc = ChatViewController()
+        let vc = ChatViewController(with: "asdfasdfsad@gamil.com")
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.title = "Jemmy Smith"
         self.navigationController?.pushViewController(vc, animated: true)
