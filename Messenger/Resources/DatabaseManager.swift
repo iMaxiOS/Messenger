@@ -83,5 +83,16 @@ extension DatabaseManager {
             })
         })
     }
+    
+    public func getAllUsers(complition: @escaping (Result<[[String: String]], Error>) -> Void) {
+        database.child("users").observeSingleEvent(of: .value, with: { snapshot in
+            guard let value = snapshot.value as? [[String: String]] else {
+                complition(.failure(StorageError.failedToFetch))
+                return
+            }
+            
+            complition(.success(value))
+        })
+    }
 }
 
