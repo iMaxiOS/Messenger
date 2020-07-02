@@ -10,19 +10,6 @@ import UIKit
 import MessageKit
 import InputBarAccessoryView
 
-struct Message: MessageType {
-    var sender: SenderType
-    var messageId: String
-    var sentDate: Date
-    var kind: MessageKind
-}
-
-struct Sender: SenderType {
-    var photoURL: String
-    var senderId: String
-    var displayName: String
-}
-
 class ChatViewController: MessagesViewController {
     
     public var isNewConversation = false
@@ -59,9 +46,13 @@ class ChatViewController: MessagesViewController {
     }
     
     private func createMessageId() -> String? {
-        guard let currentUserId = UserDefaults.standard.value(forKey: "email") else { return nil }
+        guard let currentUserId = UserDefaults.standard.value(forKey: "email") as? String else {
+            return nil
+        }
+        
+        let safeCurrentEmail = DatabaseManager.safeEmail(email: currentUserId)
         let dateString = Self.dateFormatter.string(from: Date())
-        let newIdentifier = "\(otherUserEmail)_\(currentUserId)_\(dateString)"
+        let newIdentifier = "\(otherUserEmail)_\(safeCurrentEmail)_\(dateString)"
         
         print("Create message id \(newIdentifier)")
         return newIdentifier
